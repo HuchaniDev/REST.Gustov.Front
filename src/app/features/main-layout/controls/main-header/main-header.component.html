@@ -1,0 +1,23 @@
+<div
+  class="select-none flex items-center justify-between h-14 w-full pr-5 bg-primary border-b-[0.5px]  drop-shadow-sm border-gray-400 relative z-30 overflow-hidden">
+  <div class="flex h-full pr-16 rounded-r-full items-center gap-3 bg-primary-dark  text-2xl font-bold text-primary-light">
+    <div class="h-full p-1">
+    </div>
+    <h1 (click)="navigateToHome()" class="cursor-pointer">
+      {{title}}
+    </h1>
+  </div>
+  <div class="flex items-center gap-4">
+    <button (click)="logout()" class="text-sm text-nowrap py-1 px-2 border border-orange-300 rounded-lg shadow-md cursor-pointer">cerrar session</button>
+    <div class="flex items-center gap-3">
+      <div class="flex flex-col gap-1">
+        <h2 class="text-sm leading-none text-nowrap font-semibold text-primary-dark">{{userName | uppercase}}</h2>
+        <span class="text-sm leading-none text-teal-900 text-nowrap">{{role}}</span>
+      </div>
+      
+      <div class="w-12 h-12 bg-cover bg-lime-500 shadow-black shadow-md rounded-full p-0.5">
+        <img class="w-full h-full  rounded-full" src="https://images.pexels.com/photos/1704488/pexels-photo-1704488.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="perfil">
+      </div>
+    </div>
+  </div>
+</div>  

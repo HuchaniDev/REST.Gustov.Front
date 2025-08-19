@@ -1,0 +1,137 @@
+<div class="flex flex-col h-full gap-1 select-none overflow-hidden">
+    <div class="flex items-center justify-between w-full h-12 lg:h-16 px-4 bg-white rounded-[4px] shadow-sm ">
+        <div class="flex flex-col gap-1">
+            <h1 class="text-sm leading-none select-none" title="">
+                Menu
+            </h1>
+            <span class="hidden text-xs leading-none select-none lg:block text-enable">
+                Gestiona tu menu del Día
+            </span>
+        </div>
+        <button
+                class="text-sm text-white bg-orange-600 rounded-[4px] px-1 h-[34px] flex justify-center items-center gap-2 cursor-pointer"
+                (click)="newCategory()">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+            </svg>
+
+            <h1 class="text-white text-nowrap">Nueva Categoria</h1>
+        </button>
+    </div>
+
+    <div class="flex flex-col w-full h-full py-2 bg-white rounded-[4px] shadow-sm gap-2 overflow-y-auto ">
+        @if (isProcessing()) {
+            @for (_ of [1, 2, 3, 4, 5]; track $index) {
+                <div class="flex justify-between items-center p-3 rounded-[4px] animate-pulse">
+                    <div class="h-6 w-32 bg-gray-300  rounded"></div>
+                    <div class="flex gap-x-52">
+                        <div class="flex items-center gap-2 space-x-2">
+                            <div class="h-5 w-5 bg-gray-300  rounded"></div>
+                        </div>
+                    </div>
+                </div>
+            }
+        } @else {
+            @for (category of itemCategories ; track category.categoryId) {
+                <div class="flex flex-col gap-1 px-2 mb-2 rounded-sm lg:px-4 bg-gray-50">
+                    <div class="flex flex-col gap-[2px] position">
+                        <!-- Título e íconos -->
+                        <div class="flex items-center justify-between w-full border-b-[1px] border-dashed border-b-gray-500 py-1">
+                            <div class="flex items-center justify-center gap-4">
+                                <h1 class="text-sm leading-none font-primaryRegular text-secondary">
+                                    {{ category.categoryName }}
+                                </h1>
+                            </div>
+
+                            <!-- Botón expandir -->
+                            <div
+                                    class="relative z-10 p-1 rounded-lg cursor-pointer hover:bg-gray-200"
+                                    (click)="toggleCategory(category)">
+<!--                                <svg-icon-->
+<!--                                        class="flex w-4 h-4 transition-transform duration-300"-->
+<!--                                        [ngClass]="{-->
+<!--                      'rotate-180 text-primary': expandedEducationTypes().has(educationType.id),-->
+<!--                      'text-secondary': !expandedEducationTypes().has(educationType.id)-->
+<!--                    }"-->
+<!--                                        src="assets/icons/icon-arrow-down.svg">-->
+<!--                                </svg-icon>-->
+
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6"
+                                [ngClass]="{
+                                'rotate-180': category.isCollapsed
+                                }">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5" />
+                                </svg>
+                            </div>
+                        </div>
+
+                        <!-- Contenido colapsable -->
+                        <div class="overflow-hidden transition-all ease-linear duration-600"
+                             [ngClass]="{
+                          'max-h-0 opacity-0': category.isCollapsed,
+                          'max-h-[1000px] opacity-100': !category.isCollapsed
+                        }">
+
+                            <!-- Header y botón "Agregar " -->
+                            <div class="flex items-center justify-between text-xs group">
+                                <div></div>
+                                <div class="flex items-center gap-2 px-2 py-1 bg-teal-200 rounded-lg cursor-pointer hover:bg-teal-300"
+                                     (click)="openItemForm(category.categoryId,0)">
+                                    <h1 class="text-xs text-teal-700 font-primaryLight">
+                                        Agregar Item
+                                    </h1>
+                                    <div class="flex items-center justify-center w-4 h-4 border-[1px] rounded-full border-teal-700 group-hover:border-primary">
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="flex flex-col gap-2 p-2">
+                                    @for (items of category.items; track items.id) {
+                                        <div class="flex w-full flex-col items-center gap-4 py-1 px-3 rounded-[4px] border border-x-primary-light md:flex-row ">
+                                            <div class="flex-1 flex gap-2">
+                                                <h1 class="text-secondary flex items-center text-sm font-primarySemiBold">{{ items.name }}</h1>
+                                            </div>
+                                            <div class="flex flex-grow  justify-between gap-4 ">
+                                                <div>
+                                                    <label class="text-enable text-sm">Registrado</label>
+                                                    <h3 class=" text-sm">fecha</h3>
+                                                </div>
+                                                <div class="flex items-center">
+                                                    <check-box-switch [checked]="true" (checkChange)="changeStatus($event)">
+                                                    </check-box-switch>
+
+                                                </div>
+                                                <div class="flex justify-end items-center gap-2 group w-16">
+                                                    <button type="button"  (click)="deleteItem(items.id)">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                                                            <path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" />
+                                                        </svg>
+
+                                                    </button>
+                                                    <button type="button"  (click)="openItemForm(category.categoryId,items.id)">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                                                            <path stroke-linecap="round" stroke-linejoin="round" d="m16.862 4.487 1.687-1.688a1.875 1.875 0 1 1 2.652 2.652L10.582 16.07a4.5 4.5 0 0 1-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 0 1 1.13-1.897l8.932-8.931Zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0 1 15.75 21H5.25A2.25 2.25 0 0 1 3 18.75V8.25A2.25 2.25 0 0 1 5.25 6H10" />
+                                                        </svg>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                    } @empty {
+                                        <div class="flex flex-col items-center justify-center w-full h-fit gap-4 text-sm text-center text-gray-500 p-5">
+
+                                            <h1 class="m text-xs">Sin horarios</h1>
+                                        </div>
+                                    }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            } @empty {
+                <div>sin datos</div>
+            }
+        }
+    </div>
+</div>
