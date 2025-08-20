@@ -52,6 +52,7 @@ export default class SaleIndexComponent {
     }
     selectedCategory(categoryId:number){
         this.categorySelectedId.set(categoryId);
+        this.getItems();
     }
 
     getItems(){
@@ -60,5 +61,11 @@ export default class SaleIndexComponent {
                 this.categoriesItems = response.data;
             }
         })
+    }
+
+    getStockColor(stock: number): string {
+        if (stock === 0) return 'red';       // Sin stock
+        if (stock <= 5) return 'orange';     // Pocas unidades
+        return 'green';                      // Stock suficiente
     }
 }
