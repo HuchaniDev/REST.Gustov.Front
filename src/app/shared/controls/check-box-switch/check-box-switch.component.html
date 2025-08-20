@@ -1,31 +1,15 @@
-<div class="flex flex-col justify-center items-center">
-    <label class="relative inline-flex items-center cursor-pointer">
-        <input type="checkbox" value="" class="sr-only peer">
-        <div
-                class="w-14 h-7 bg-gray-300 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-lime-300
-           dark:peer-focus:ring-lime-800 rounded-full peer
-           peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full
-           peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px]
-           after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6
-           after:transition-all peer-checked:bg-lime-500
-           peer-checked:shadow-lg peer-checked:shadow-lime-500/40
-           dark:bg-gray-600 dark:peer-checked:bg-lime-400">
-        </div>
-    </label>
+<div
+        class="w-5 h-5 border-2 border-gray-500 rounded-[4px] flex items-center justify-center cursor-pointer transition-all duration-300"
+        [class.bg-green-400]="checked"
+        [class.border-green-700]="checked"
+        (click)="toggle()"
+>
+    @if(checked){
+        <span class="flex justify-center items-center text-white font-bold select-none">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="black" class="size-4">
+              <path fill-rule="evenodd" d="M19.916 4.626a.75.75 0 0 1 .208 1.04l-9 13.5a.75.75 0 0 1-1.154.114l-6-6a.75.75 0 0 1 1.06-1.06l5.353 5.353 8.493-12.74a.75.75 0 0 1 1.04-.207Z" clip-rule="evenodd" />
+            </svg>
 
-    <label class="select-none inline-flex cursor-pointer">
-        <div
-                (click)="active($event);"
-        >
-            <input
-                    type="checkbox"
-                    [checked]="checked()"
-                    class="sr-only peer">
-            <div class="relative w-14 h-7 rounded-full peer bg-gray-400 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[4px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-6 after:w-6 after:transition-all after:duration-1000 dark:border-gray-600 peer-checked:bg-lime-500
-      dark:bg-gray-700 dark:peer-checked:bg-lime-400
-                peer-checked:shadow-md peer-checked:shadow-lime-500/50">
-            </div>
-
-        </div>
-    </label>
+        </span>
+    }
 </div>

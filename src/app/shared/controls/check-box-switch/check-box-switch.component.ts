@@ -1,4 +1,4 @@
-import {Component, input, output} from "@angular/core";
+import {Component, Input, input, output} from "@angular/core";
 
 @Component({
     selector: 'check-box-switch',
@@ -7,14 +7,11 @@ import {Component, input, output} from "@angular/core";
     imports: [],
 })
 export class SwitchButtonComponent {
-    checked = input<boolean>(false);
-    checkChange = output<boolean>();
+    @Input() checked: boolean = false;
+    checkedChange  = output<boolean>();
 
-    active(event:Event) {
-        event.stopImmediatePropagation();
-        event.stopPropagation();
-        event.preventDefault();
-        this.checkChange.emit(!this.checked());
+    toggle(){
+        this.checked = !this.checked;
+        this.checkedChange .emit(this.checked);
     }
-
 }

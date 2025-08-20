@@ -1,0 +1,74 @@
+<div>
+    <app-loader
+    [isLoading]="isProcessing()"
+    [message]="message()"
+    >
+    </app-loader>
+    <dialog-header [titleHeader]="(categoryId? 'Editar': 'Nuevo')+': Categoria'"
+                   (onClose)="close(false)"
+    ></dialog-header>
+    <div>
+        <form [formGroup]="formGroup" class="">
+
+            <div class="p-4 flex flex-col gap-5">
+                <div class="w-full">
+                    <label for="">Nombre</label>
+                    <input
+                            formControlName="name"
+                            type="text" app-input useIcon="false" class="w-full p-2 border border-gray-300 rounded-lg" placeholder=" ej: Postres">
+
+                    @if (formGroup.get('name')?.hasError('required') && formGroup.get('name')?.touched) {
+                        <div class="text-red-500 text-sm">Este campo es requerido</div>
+                    }
+<!--                    @if (formGroup.get('name')?.hasError('pattern') && formGroup.get('name')?.touched) {-->
+<!--                        <div class="text-red-500 text-xs">Solo números</div>-->
+<!--                    }-->
+                </div>
+                <div id="description" class="h-56">
+                    <label for="">Descripción</label>
+                    <textarea
+                            formControlName="description"
+                            app-input
+                            class="h-40 p-2 border resize-none border-gray-300 rounded-lg "
+                            placeholder="Escribe aquí...">
+        </textarea>
+<!--                    @if (formGroup.get('description')?.hasError('required') && formGroup.get('description')?.touched) {-->
+<!--                        <div class="text-red-500 text-xs">Este campo es requerido</div>-->
+<!--                    }-->
+
+                </div>
+
+                <div class="flex justify-between gap-5" >
+                    <div>
+                        @if(categoryId && categoryId>0){
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="red" class="size-6 cursor-pointer"
+                            (click)="deleteCategory()">
+                                <path fill-rule="evenodd" d="M16.5 4.478v.227a48.816 48.816 0 0 1 3.878.512.75.75 0 1 1-.256 1.478l-.209-.035-1.005 13.07a3 3 0 0 1-2.991 2.77H8.084a3 3 0 0 1-2.991-2.77L4.087 6.66l-.209.035a.75.75 0 0 1-.256-1.478A48.567 48.567 0 0 1 7.5 4.705v-.227c0-1.564 1.213-2.9 2.816-2.951a52.662 52.662 0 0 1 3.369 0c1.603.051 2.815 1.387 2.815 2.951Zm-6.136-1.452a51.196 51.196 0 0 1 3.273 0C14.39 3.05 15 3.684 15 4.478v.113a49.488 49.488 0 0 0-6 0v-.113c0-.794.609-1.428 1.364-1.452Zm-.355 5.945a.75.75 0 1 0-1.5.058l.347 9a.75.75 0 1 0 1.499-.058l-.346-9Zm5.48.058a.75.75 0 1 0-1.498-.058l-.347 9a.75.75 0 0 0 1.5.058l.345-9Z" clip-rule="evenodd" />
+                            </svg>
+                        }
+
+                    </div>
+                    <div class="flex justify-end gap-5">
+                        <button
+                            type="button"
+                            primary-button
+                            [disabled]="!formGroup.valid || isProcessing()"
+                            (click)="save()">
+
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 hidden md:block">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M5.25 14.25h13.5m-13.5 0a3 3 0 0 1-3-3m3 3a3 3 0 1 0 0 6h13.5a3 3 0 1 0 0-6m-16.5-3a3 3 0 0 1 3-3h13.5a3 3 0 0 1 3 3m-19.5 0a4.5 4.5 0 0 1 .9-2.7L5.737 5.1a3.375 3.375 0 0 1 2.7-1.35h7.126c1.062 0 2.062.5 2.7 1.35l2.587 3.45a4.5 4.5 0 0 1 .9 2.7m0 0a3 3 0 0 1-3 3m0 3h.008v.008h-.008v-.008Zm0-6h.008v.008h-.008v-.008Zm-3 6h.008v.008h-.008v-.008Zm0-6h.008v.008h-.008v-.008Z" />
+                            </svg>
+                            Guardar
+                        </button>
+                        <button type="button" default-button (click)="close(false)">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 hidden md:block">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12" />
+                            </svg>
+                            Cancelar
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
