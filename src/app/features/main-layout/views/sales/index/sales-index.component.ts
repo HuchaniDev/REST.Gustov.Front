@@ -163,7 +163,7 @@ export default class SaleIndexComponent {
     openTicket(ticked:SaleDetailTickedInterface){
         this.#dialogService.open(TickedShowComponent,{
             size:{
-                width: '800px',
+                width: '400px',
                 minWidth: '350px',
                 maxWidth: '95%',
                 height: 'auto',
