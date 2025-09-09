@@ -11,7 +11,7 @@ import {DialogService} from "../../../../../shared/controls/dialog";
 import {CategoryFormComponent} from "../category-form/category-form.component";
 import {ItemFormComponent} from "../item-form/item-form.component";
 import {DeleteAlertComponent} from "../../../../../shared/controls/delete-alert/delete-alert.component";
-import {ItemSummaryInterface} from "../../../models/item-sumary.interface";
+import {ItemSummary} from "../../../models/item-sumary.interface";
 
 @Component({
     selector: 'app-menu',
@@ -89,7 +89,7 @@ export default class MenuComponent{
             })
     }
 
-    changeStatus(item:ItemSummaryInterface,status:boolean){
+    changeStatus(item:ItemSummary,status:boolean){
         console.log('chage status',status,item);
         this.#itemsService.changeStatus$(item.id,status).subscribe({
             next: (value)=> {
