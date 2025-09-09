@@ -27,6 +27,10 @@ const mainLayoutRoutes: Routes = [
                 path:'sale',
                 loadComponent:() => import('./views/sales/index/sales-index.component'),
             },
+            {
+                path:'reports',
+                loadComponent:() => import('./views/reports/reports.component'),
+            },
         ]
     }
 ];
