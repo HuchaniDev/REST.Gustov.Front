@@ -5,6 +5,7 @@ export interface ItemInterface{
     description: string;
     status: boolean;
     stock:number;
+    discount:number;
     imageUrl: string;
     categoryId: number;
 }

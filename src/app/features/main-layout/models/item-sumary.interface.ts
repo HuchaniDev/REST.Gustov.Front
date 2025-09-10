@@ -3,6 +3,7 @@ export interface ItemSummary {
     name: string;
     price: number;
     stock: number;
+    discount: number;
     statusColor: string;
     status: boolean;
     imageUrl: string;

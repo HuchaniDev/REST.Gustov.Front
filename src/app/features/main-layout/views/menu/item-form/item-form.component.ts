@@ -74,6 +74,7 @@ export class ItemFormComponent {
             id: new FormControl<number|null>(this.itemId),
             name: new FormControl <string|null>(null,[Validators.required]),
             price: new FormControl<number|null>(null,[Validators.required, Validators.pattern(/^\d+(\.\d{1,2})?$/),Validators.min(0)]),
+            discount: new FormControl<number|null>(null,[Validators.required, Validators.pattern(/^\d+(\.\d{1,2})?$/),Validators.min(0)]),
             description: new FormControl<string>('',),
             stock: new FormControl<number>(1,[Validators.required,Validators.min(0)]),
             imageUrl: new FormControl<string|null>(null,[Validators.required]),
@@ -97,6 +98,7 @@ export class ItemFormComponent {
                                 price: response.data.price,
                                 description: response.data.description,
                                 stock:response.data.stock,
+                                discount:response.data.discount,
                                 imageUrl:response.data.imageUrl,
                                 categoryId:response.data.categoryId
                             }

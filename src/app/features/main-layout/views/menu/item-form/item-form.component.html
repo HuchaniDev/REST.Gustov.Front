@@ -41,6 +41,24 @@
                             <div class="text-red-500 text-xs">Solo números con dos digitos despues del punto (ej.: 10.00)</div>
                         }
                     </div>
+
+                    <div class="w-36">
+                        <label for="">Descuento</label>
+                        <div class="flex items-center gap-2">
+                            <input
+                                    formControlName="discount"
+                                    min="0"
+                                    type="number" app-input useIcon="false" class="relative w-full p-2 border border-gray-300 rounded-lg" placeholder=" ej: 10">
+                            <span class="absolute right-5">%</span>
+                        </div>
+
+                        @if (formGroup.get('discount')?.hasError('required') && formGroup.get('discount')?.touched) {
+                            <div class="text-red-500 text-xs">El descuento es requerido</div>
+                        }
+                        @if (formGroup.get('discount')?.hasError('pattern') && formGroup.get('discount')?.touched) {
+                            <div class="text-red-500 text-xs">Solo números positivos (ej.: 10)</div>
+                        }
+                    </div>
                 </div>
 
                 <div class="flex gap-5">
